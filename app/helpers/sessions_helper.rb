@@ -26,6 +26,20 @@ module SessionsHelper
   def logged_in?
     !current_user.nil?
   end
+
+  def editor?
+    if logged_in? && current_user.role == "editor"
+      return true
+    else
+    end
+  end
+
+  def admin?
+    if logged_in? && current_user.role == "admin"
+      return true
+    else
+    end
+  end
   
   # Logs out the current user.
   def log_out
