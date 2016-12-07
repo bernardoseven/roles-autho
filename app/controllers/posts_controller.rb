@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  #before_action :logged_in_user, only: [:update, :destroy]
+  before_action :logged_in_user, only: [:create]
   before_action :admin, only: [:destroy]
   before_action :editor, only: [:update]
 
@@ -77,21 +77,13 @@ class PostsController < ApplicationController
 
     # Defines editor role
     def admin
-      @user = User.find(params[:id])
-      if @user.role == "admin"
-        return true
-      else
-        redirect_to root
-      end
+      #@user = User.find(params[:id])
+      redirect_to(root_url) unless current_user.role == "admin"
     end
 
     # Defines editor role
     def editor
-      @user = User.find(params[:id])
-      if @user.role == "editor"
-        return true
-      else
-        redirect_to root
-      end
+      #@user = User.find(params[:id])
+      redirect_to(root_url) unless current_user.role == "editor"
     end
 end

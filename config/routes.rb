@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :proyects
   root    'posts#index'
 
   resources :posts
